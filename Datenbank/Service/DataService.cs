@@ -16,7 +16,17 @@ namespace Datenbank.Service;
 public class DataService : INotifyPropertyChanged
 {
     private Kunde _kunde;
-    public ObservableCollection<Kunde> Kunden { get; set; } = new ObservableCollection<Kunde>();
+    private ObservableCollection<Kunde> _kundeList = new ObservableCollection<Kunde>();
+    public ObservableCollection<Kunde> Kunden {
+        get => _kundeList;
+        set
+        {
+            if (_kundeList == value) return;
+
+            _kundeList = value;
+            OnPropertyChanged();
+        }
+    }
     public Kunde Kunde {
         get => _kunde;
         set
@@ -32,16 +42,16 @@ public class DataService : INotifyPropertyChanged
     protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null) { PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName)); }
 
     public void getData(Filter filter) {
-        
-        Kunden.Clear();
+
         using (var context = new DataBaseContext())
         {
             var list = SearchProducts(filter.returnFilterArgsArray()).ToList();
 
-            foreach(var item in list)
-            {
-                Kunden.Add(item);
-            }
+            Kunden = new ObservableCollection<Kunde>(list);
+            //foreach(var item in list)
+            //{
+            //    Kunden.Add(item);
+            //}
         }
     }
 
