@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SchreinereiSchmidKundensoftware"
         mc:Ignorable="d"
-        Title="EingabeFenster" Height="270" Width="410">
+        Title="EingabeFenster" SizeToContent="WidthAndHeight">
 
     <Grid DataContext="{Binding Kunde}">
         <Grid.RowDefinitions>

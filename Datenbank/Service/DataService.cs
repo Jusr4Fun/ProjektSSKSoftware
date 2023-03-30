@@ -74,4 +74,14 @@ public class DataService : INotifyPropertyChanged
         }
         return query;
     }
+
+    public void UpdateKunde()
+    {
+        using(var context = new DataBaseContext())
+        {
+            context.Update(Kunde);
+
+            context.SaveChanges();
+        }
+    }
 }

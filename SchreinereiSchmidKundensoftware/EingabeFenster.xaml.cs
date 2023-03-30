@@ -30,7 +30,8 @@ namespace SchreinereiSchmidKundensoftware
 
         private void Save_Changes(object sender, RoutedEventArgs s)
         {
-
+            dataService.UpdateKunde();
+            Close();
         }
     }
 }
