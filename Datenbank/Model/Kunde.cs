@@ -16,4 +16,13 @@ public class Kunde
     public string PLZ { get; set; }
     public int AnsprechId { get; set; }
     public Ansprechpartner Ansprechpartner { get; set; }
+
+    public Kunde Clone() => new Kunde()
+    {
+        ID = ID,
+        Betrieb = this.Betrieb,
+        Straße = this.Straße,
+        Ort = this.Ort,
+        PLZ = this.PLZ
+    };
 }
