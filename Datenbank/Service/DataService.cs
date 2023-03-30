@@ -61,11 +61,21 @@ public class DataService : INotifyPropertyChanged
     public event PropertyChangedEventHandler? PropertyChanged;
     protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null) { PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName)); }
 
-    public void getData(Filter filter) {
+    public void getData() {
 
         using (var context = new DataBaseContext())
         {
-            var list = SearchProducts(filter.returnFilterArgsArray()).ToList();            
+            var list = SearchProducts(_filter.returnFilterArgsArray()).ToList();            
+            Kunden = new ObservableCollection<Kunde>(list);
+        }
+    }
+
+    public void getData(Filter filter)
+    {
+
+        using (var context = new DataBaseContext())
+        {
+            var list = SearchProducts(filter.returnFilterArgsArray()).ToList();
             Kunden = new ObservableCollection<Kunde>(list);
         }
     }
