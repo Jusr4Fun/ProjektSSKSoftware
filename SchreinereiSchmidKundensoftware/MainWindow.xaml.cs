@@ -40,9 +40,10 @@ public partial class MainWindow : Window
         dataservice.getData(filter);
     }
 
-    private void Button_Click(object sender, RoutedEventArgs e)
+    private void Change_Click(object sender, RoutedEventArgs e)
     {
         var window = new EingabeFenster(dataservice);
+        dataservice.Kunde_old = dataservice.Kunde;
         window.Owner = this;
         window.ShowDialog();
     }

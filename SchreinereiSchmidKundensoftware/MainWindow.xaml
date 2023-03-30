@@ -1,111 +1,190 @@
-﻿<Window x:Class="SchreinereiSchmidKundensoftware.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d"
-        Title="MainWindow" SizeToContent="WidthAndHeight">
+﻿<Window
+    x:Class="SchreinereiSchmidKundensoftware.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="MainWindow"
+    SizeToContent="WidthAndHeight"
+    mc:Ignorable="d">
     <Grid Margin="20">
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="auto" />
             </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Column="0" FontSize="24" Text="Kundenverwaltung"></TextBlock>
-            <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Center">
-                <TextBlock FontSize="24" Text="Suche:"/>
-                <TextBox Width="100" Margin="20 0 10 0" MaxLines="1" x:Name="Suchfeld" TextChanged="Suchfeld_TextChanged"/>
+            <TextBlock
+                Grid.Column="0"
+                FontSize="24"
+                Text="Kundenverwaltung" />
+            <StackPanel
+                Grid.Column="1"
+                HorizontalAlignment="Center"
+                Orientation="Horizontal">
+                <TextBlock FontSize="24" Text="Suche:" />
+                <TextBox
+                    x:Name="Suchfeld"
+                    Width="100"
+                    Margin="20,0,10,0"
+                    MaxLines="1"
+                    TextChanged="Suchfeld_TextChanged" />
             </StackPanel>
-            <StackPanel Orientation="Horizontal" Grid.Column="2" HorizontalAlignment="Center">
-                <Button Padding="10 0 10 0"  Margin="0 0 10 0" HorizontalAlignment="Right"  Content="neuer Kunde" Click="Neuer_Kunde_Click"/>
-                
+            <StackPanel
+                Grid.Column="2"
+                HorizontalAlignment="Center"
+                Orientation="Horizontal">
+                <Button
+                    Margin="0,0,10,0"
+                    Padding="10,0,10,0"
+                    HorizontalAlignment="Right"
+                    Click="Neuer_Kunde_Click"
+                    Content="neuer Kunde" />
+
             </StackPanel>
         </Grid>
 
-        <Grid Grid.Row="1" Margin="0 10 0 0">
+        <Grid Grid.Row="1" Margin="0,10,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
                 <ColumnDefinition Width="350" SharedSizeGroup="ColumnBase2" />
             </Grid.ColumnDefinitions>
 
-            <ListView Grid.Column="0" ItemsSource="{Binding Kunden}" SelectedIndex="0" SelectionChanged="ListView_SelectionChanged" x:Name="AllList">
+            <ListView
+                x:Name="AllList"
+                Grid.Column="0"
+                ItemsSource="{Binding Kunden}"
+                SelectedIndex="0"
+                SelectionChanged="ListView_SelectionChanged">
                 <ListView.View>
                     <GridView>
                         <GridView.Columns>
-                            <GridViewColumn Header="Kundennummer" DisplayMemberBinding="{Binding ID}"/>
-                            <GridViewColumn Header="Betrieb" DisplayMemberBinding="{Binding Betrieb}"/>
-                            <GridViewColumn Header="Ort" DisplayMemberBinding="{Binding Ort}"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding ID}" Header="Kundennummer" />
+                            <GridViewColumn DisplayMemberBinding="{Binding Betrieb}" Header="Betrieb" />
+                            <GridViewColumn DisplayMemberBinding="{Binding Ort}" Header="Ort" />
                         </GridView.Columns>
                     </GridView>
                 </ListView.View>
             </ListView>
 
-            <Grid Margin="10" Grid.Column="1" DataContext="{Binding Kunde}">
+            <Grid
+                Grid.Column="1"
+                Margin="10"
+                DataContext="{Binding Kunde}">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
                 <Grid Grid.Row="0">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="auto" MinHeight="30"/>
-                        <RowDefinition Height="auto" MinHeight="20"/>
-                        <RowDefinition Height="auto" MinHeight="20"/>
-                        <RowDefinition Height="auto" MinHeight="20"/>
+                        <RowDefinition Height="auto" MinHeight="30" />
+                        <RowDefinition Height="auto" MinHeight="20" />
+                        <RowDefinition Height="auto" MinHeight="20" />
+                        <RowDefinition Height="auto" MinHeight="20" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition SharedSizeGroup="FirstColumn"/>
-                        <ColumnDefinition SharedSizeGroup="SecondColumn"/>
+                        <ColumnDefinition SharedSizeGroup="FirstColumn" />
+                        <ColumnDefinition SharedSizeGroup="SecondColumn" />
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock Text="Betrieb" FontSize="16" Grid.Row="0"/>
-                    <TextBlock Text="Betriebsname" Grid.Row="1" Grid.Column="0"/>
-                    <TextBlock Text="{Binding Betrieb}" Grid.Row="1" Grid.Column="1"/>
-                    <TextBlock Text="Anschrift" Grid.Row="2" Grid.Column="0"/>
-                    <TextBlock Text="{Binding Straße}" Grid.Row="2" Grid.Column="1"/>
-                    <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="1">
-                        <TextBlock Text="{Binding PLZ}"/>
-                        <TextBlock Text=" "/>
-                        <TextBlock Text="{Binding Ort}"/>
+                    <TextBlock
+                        Grid.Row="0"
+                        FontSize="16"
+                        Text="Betrieb" />
+                    <TextBlock
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Text="Betriebsname" />
+                    <TextBlock
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Text="{Binding Betrieb}" />
+                    <TextBlock
+                        Grid.Row="2"
+                        Grid.Column="0"
+                        Text="Anschrift" />
+                    <TextBlock
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        Text="{Binding Straße}" />
+                    <StackPanel
+                        Grid.Row="3"
+                        Grid.Column="1"
+                        Orientation="Horizontal">
+                        <TextBlock Text="{Binding PLZ}" />
+                        <TextBlock Text=" " />
+                        <TextBlock Text="{Binding Ort}" />
                     </StackPanel>
                 </Grid>
-                
+
                 <Grid Grid.Row="1" DataContext="{Binding Ansprechpartner}">
-                    <Grid.RowDefinitions >
-                        <RowDefinition Height="auto" MinHeight="30"/>
-                        <RowDefinition Height="auto" MinHeight="20"/>
-                        <RowDefinition Height="auto" MinHeight="20"/>
-                        <RowDefinition Height="auto" MinHeight="20"/>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" MinHeight="30" />
+                        <RowDefinition Height="auto" MinHeight="20" />
+                        <RowDefinition Height="auto" MinHeight="20" />
+                        <RowDefinition Height="auto" MinHeight="20" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition SharedSizeGroup="FirstColumn"/>
-                        <ColumnDefinition SharedSizeGroup="SecondColumn"/>
+                        <ColumnDefinition SharedSizeGroup="FirstColumn" />
+                        <ColumnDefinition SharedSizeGroup="SecondColumn" />
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock Text="Ansprechpartner" FontSize="16" Grid.Row="0"/>
-                    <TextBlock Text="Name" Grid.Row="1" Grid.Column="0"/>
-                    <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1">
-                        <TextBlock Text="{Binding Vorname}"/>
-                        <TextBlock Text=" "/>
+                    <TextBlock
+                        Grid.Row="0"
+                        FontSize="16"
+                        Text="Ansprechpartner" />
+                    <TextBlock
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Text="Name" />
+                    <StackPanel
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Orientation="Horizontal">
+                        <TextBlock Text="{Binding Vorname}" />
+                        <TextBlock Text=" " />
                         <TextBlock Text="{Binding Name}" />
                     </StackPanel>
-                    <TextBlock Text="E-Mail" Grid.Row="2" Grid.Column="0"/>
-                    <TextBlock Text="{Binding EMail}" Grid.Row="2" Grid.Column="1"/>
-                    <TextBlock Text="Telefonnummer" Grid.Row="3" Grid.Column="0" Margin="0 0 10 0"/>
-                    <TextBlock Text="{Binding Telefon}" Grid.Row="3" Grid.Column="1"/>
+                    <TextBlock
+                        Grid.Row="2"
+                        Grid.Column="0"
+                        Text="E-Mail" />
+                    <TextBlock
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        Text="{Binding EMail}" />
+                    <TextBlock
+                        Grid.Row="3"
+                        Grid.Column="0"
+                        Margin="0,0,10,0"
+                        Text="Telefonnummer" />
+                    <TextBlock
+                        Grid.Row="3"
+                        Grid.Column="1"
+                        Text="{Binding Telefon}" />
                 </Grid>
 
                 <DockPanel Grid.Row="2">
-                    <Button Padding="10 0 10 0"  HorizontalAlignment="Left" VerticalAlignment="Bottom" Content="Löschen" Click="Delete_Click"/>
-                    <Button Padding="10 0 10 0"  HorizontalAlignment="Right" VerticalAlignment="Bottom" Content="Bearbeiten" Click="Button_Click"/>
+                    <Button
+                        Padding="10,0,10,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Bottom"
+                        Click="Delete_Click"
+                        Content="Löschen" />
+                    <Button
+                        Padding="10,0,10,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Bottom"
+                        Click="Change_Click"
+                        Content="Bearbeiten" />
                 </DockPanel>
             </Grid>
         </Grid>
