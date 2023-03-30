@@ -1,30 +1,24 @@
-﻿using System;
-using System.CodeDom;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-namespace Datenbank.Service
+namespace Datenbank.Service;
+
+public class Filter
 {
-    public class Filter
+    public List<string> FilterArguments { get; set; } = new List<string>();
+
+    public void ChangeFilterArguments(string suche)
     {
-        public List<string> FilterArguments { get; set; } = new List<string>();
+        FilterArguments.Clear();
+        var argumente = suche.Split(' ');
 
-        public void ChangeFilterArguments(string suche)
+        foreach (var arg in argumente)
         {
-            FilterArguments.Clear();
-            var argumente = suche.Split(' ');
-
-            foreach (var arg in argumente)
-            {
-                FilterArguments.Add(arg);
-            }
+            FilterArguments.Add(arg);
         }
+    }
 
-        public string[] returnFilterArgsArray()
-        {
-            return FilterArguments.ToArray();
-        }
+    public string[] returnFilterArgsArray()
+    {
+        return FilterArguments.ToArray();
     }
 }
