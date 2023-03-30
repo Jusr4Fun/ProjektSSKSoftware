@@ -43,7 +43,7 @@ public partial class MainWindow : Window
     private void Change_Click(object sender, RoutedEventArgs e)
     {
         var window = new EingabeFenster(dataservice);
-        dataservice.Kunde_old = dataservice.Kunde;
+        dataservice.Kunde_old = dataservice.Kunde.Clone();
         window.Owner = this;
         window.ShowDialog();
     }

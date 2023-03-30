@@ -20,6 +20,7 @@ public class DataService : INotifyPropertyChanged
     private Kunde _kunde;
     private Kunde _kunde_old;
     private ObservableCollection<Kunde> _kundeList = new ObservableCollection<Kunde>();
+    private DataBaseContext _context;
     public ObservableCollection<Kunde> Kunden {
         get => _kundeList;
         set
@@ -56,6 +57,7 @@ public class DataService : INotifyPropertyChanged
     public DataService(Filter filter)
     {
         _filter= filter;
+        _context= new DataBaseContext();
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;
@@ -63,21 +65,14 @@ public class DataService : INotifyPropertyChanged
 
     public void getData() {
 
-        using (var context = new DataBaseContext())
-        {
-            var list = SearchProducts(_filter.returnFilterArgsArray()).ToList();            
-            Kunden = new ObservableCollection<Kunde>(list);
-        }
+        var list = SearchProducts(_filter.returnFilterArgsArray()).ToList();
+        Kunden = new ObservableCollection<Kunde>(list);
     }
 
     public void getData(Filter filter)
     {
-
-        using (var context = new DataBaseContext())
-        {
-            var list = SearchProducts(filter.returnFilterArgsArray()).ToList();
-            Kunden = new ObservableCollection<Kunde>(list);
-        }
+        var list = SearchProducts(filter.returnFilterArgsArray()).ToList();
+        Kunden = new ObservableCollection<Kunde>(list);
     }
 
     public void changeKunde(Kunde kunde)
@@ -87,8 +82,7 @@ public class DataService : INotifyPropertyChanged
 
     IQueryable<Kunde> SearchProducts(params string[] keywords)
     {
-        var dataContext = new DataBaseContext();
-        IQueryable<Kunde> query = dataContext.Kunde.Include(b => b.Ansprechpartner);
+        IQueryable<Kunde> query = _context.Kunde.Include(b => b.Ansprechpartner);
 
         foreach (string keyword in keywords)
         {
@@ -108,37 +102,24 @@ public class DataService : INotifyPropertyChanged
 
     public void UpdateKunde()
     {
-        using(var context = new DataBaseContext())
-        {
-            context.Update(Kunde);
-
-            context.SaveChanges();
-        }
+        _context.Update(Kunde);
+        _context.SaveChanges();
     }
 
     public void deleteKunde()
     {
-        using(var context = new DataBaseContext())
-        {
-            context.Remove(Kunde);
-
-            context.SaveChanges();
-        }
+        _context.Remove(Kunde);
+        _context.Remove(Kunde.Ansprechpartner);
+        _context.SaveChanges();
         getData(_filter);
     }
 
     public void NewKunde()
     {
-        using (var context = new DataBaseContext())
-        {
-            context.Database.EnsureCreated();
-
-            context.Ansprechpartner.Add(Kunde.Ansprechpartner);
-
-            context.Kunde.Add(Kunde);
-
-            context.SaveChanges();
-        }
+        _context.Database.EnsureCreated();
+        _context.Ansprechpartner.Add(Kunde.Ansprechpartner);
+        _context.Kunde.Add(Kunde);
+        _context.SaveChanges();
         getData(_filter);
     }
 }
