@@ -45,13 +45,7 @@ public class DataService : INotifyPropertyChanged
 
         using (var context = new DataBaseContext())
         {
-            var list = SearchProducts(filter.returnFilterArgsArray()).ToList();
-
-            Kunden = new ObservableCollection<Kunde>(list);
-            //foreach(var item in list)
-            //{
-            //    Kunden.Add(item);
-            //}
+            var list = SearchProducts(filter.returnFilterArgsArray()).ToList();            Kunden = new ObservableCollection<Kunde>(list);
         }
     }
 

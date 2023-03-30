@@ -82,4 +82,11 @@ public partial class MainWindow : Window
         filter.ChangeFilterArguments(Suchfeld.Text);
         dataservice.getData(filter);
     }
+
+    private void Suchfeld_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        filter.ChangeFilterArguments(Suchfeld.Text);
+        dataservice.getData(filter);
+        AllList.SelectedIndex = 0;
+    }
 }
