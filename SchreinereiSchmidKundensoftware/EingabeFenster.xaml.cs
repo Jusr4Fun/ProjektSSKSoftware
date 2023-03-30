@@ -1,4 +1,5 @@
-﻿using Datenbank.Service;
+﻿using Datenbank.Model;
+using Datenbank.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,9 +29,14 @@ namespace SchreinereiSchmidKundensoftware
             this.DataContext = dataService;
         }
 
-        private void Save_Changes(object sender, RoutedEventArgs s)
+        private void Save_Changes(object sender, RoutedEventArgs e)
         {
             dataService.UpdateKunde();
+            Close();
+        }
+
+        private void Cancel_Changes(object sender, RoutedEventArgs e)
+        {
             Close();
         }
     }

@@ -26,7 +26,7 @@
 
         <StackPanel Grid.Row="1">
             <TextBlock FontSize="15" Text="Name des Betriebs:"/>
-            <TextBox Text="{Binding Betrieb}" Margin="10"/>
+            <TextBox x:Name="NameBetriebTB" Text="{Binding Betrieb}" Margin="10"/>
             <TextBlock FontSize="15" Text="Standort:"/>
             <Grid >
                 <Grid.ColumnDefinitions>
@@ -150,6 +150,7 @@
                     Content="Speichern"
                     x:Name="SpeichernBtn"
                     Click="Save_Changes"/>
+                
                 <Button 
                     Grid.Row="2" 
                     Grid.Column="1" 
@@ -159,6 +160,7 @@
                     Height="20" 
                     HorizontalAlignment="Right"
                     x:Name="AbbrechenBtn"
+                    Click="Cancel_Changes"
                     IsCancel="True"/>
             </Grid>
         </StackPanel>
