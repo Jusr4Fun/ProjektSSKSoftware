@@ -18,7 +18,7 @@ public class Ansprechpartner
 
     public Ansprechpartner Clone() => new Ansprechpartner()
     {
-        ID = ID,
+        ID = this.ID,
         Vorname = this.Vorname, 
         Name = this.Name, 
         EMail = this.EMail, 
@@ -28,12 +28,11 @@ public class Ansprechpartner
 
     public void CopyValues(Ansprechpartner ansprechpartner)
     {
-        ID = ansprechpartner.ID;
-        Vorname = ansprechpartner.Vorname;
-        Name = ansprechpartner.Name;
-        EMail = ansprechpartner.EMail;
-        Telefon = ansprechpartner.Telefon;
-        Kunde = ansprechpartner.Kunde;
-        
+        ansprechpartner.ID = ID;
+        ansprechpartner.Vorname = Vorname;
+        ansprechpartner.Name = Name;
+        ansprechpartner.EMail = EMail;
+        ansprechpartner.Telefon = Telefon;
+        ansprechpartner.Kunde = Kunde;
     }
 }

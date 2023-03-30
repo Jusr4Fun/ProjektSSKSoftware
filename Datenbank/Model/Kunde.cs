@@ -19,23 +19,23 @@ public class Kunde
 
     public Kunde Clone() => new Kunde()
     {
-        ID = ID,
+        ID = this.ID,
         Betrieb = this.Betrieb,
         Straße = this.Straße,
         Ort = this.Ort,
         PLZ = this.PLZ,
         AnsprechId = this.AnsprechId,
-        Ansprechpartner = this.Ansprechpartner
+        Ansprechpartner = Ansprechpartner.Clone()
     };
 
     public void CopyValues(Kunde kunde)
     {
-        ID = kunde.ID;
-        Betrieb = kunde.Betrieb;
-        Straße = kunde.Straße;
-        Ort = kunde.Ort;
-        PLZ = kunde.PLZ;
-        AnsprechId = kunde.AnsprechId;
-        Ansprechpartner = kunde.Ansprechpartner;
+        kunde.ID = ID;
+        kunde.Betrieb =Betrieb;
+        kunde.Straße = Straße;
+        kunde.Ort = Ort;
+        kunde.PLZ = PLZ;
+        kunde.AnsprechId = AnsprechId;
+        Ansprechpartner.CopyValues(kunde.Ansprechpartner);
     }
 }
