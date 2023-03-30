@@ -16,7 +16,7 @@ public class DataBaseContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseMySQL("server=localhost;database=test;user=user;password=password");
+        optionsBuilder.UseMySQL("server=localhost;database=test;user=user");
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

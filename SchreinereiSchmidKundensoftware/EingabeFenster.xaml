@@ -5,8 +5,162 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SchreinereiSchmidKundensoftware"
         mc:Ignorable="d"
-        Title="EingabeFenster" Height="450" Width="800">
-    <Grid>
-        
+        Title="EingabeFenster" Height="270" Width="410">
+
+    <Grid DataContext="{Binding Kunde}">
+        <Grid.RowDefinitions>
+            <RowDefinition MaxHeight="30"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock 
+            Text="Bearbeiten" 
+            Grid.ColumnSpan="2" 
+            TextAlignment="Center" 
+            FontSize="25" 
+            Grid.Row="0"/>
+
+        <StackPanel Grid.Row="1">
+            <TextBlock FontSize="15" Text="Name des Betriebs:"/>
+            <TextBox Text="{Binding Betrieb}" Margin="10"/>
+            <TextBlock FontSize="15" Text="Standort:"/>
+            <Grid >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBlock 
+                    Margin="10" 
+                    Grid.Column="0" 
+                    Grid.Row="0" 
+                    Text="Straße:"/>
+                <TextBlock 
+                    Margin="10" 
+                    Grid.Column="0" 
+                    Grid.Row="1" 
+                    Text="Ort:"/>
+                <TextBlock 
+                    Margin="10" 
+                    Grid.Column="0" 
+                    Grid.Row="2" 
+                    Text="Postleitzahl:"/>
+
+                <TextBox 
+                    Margin="10" 
+                    Grid.Column="1" 
+                    Text="{Binding Straße}" 
+                    Grid.Row="0"/>
+                <TextBox 
+                    Margin="10" 
+                    Grid.Column="1" 
+                    Text="{Binding Ort}" 
+                    Grid.Row="1"/>
+                <TextBox 
+                    Margin="10" 
+                    Grid.Column="1" 
+                    Text="{Binding PLZ}" 
+                    Grid.Row="2"/>
+            </Grid>
+        </StackPanel>
+
+        <StackPanel 
+            Grid.Row="1"
+            Grid.Column="1">
+            <Grid 
+            DataContext="{Binding Ansprechpartner}"  
+            Grid.Row="1" 
+            Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                Text="Ansprechpartner"
+                FontSize="15"/>
+                <TextBlock
+                Margin="10"
+                Text="Name:"
+                Grid.Row="1"/>
+                <TextBox 
+                Text="{Binding Name}" 
+                Margin="10"
+                Grid.Row="1"
+                Grid.Column="1"/>
+                <TextBlock
+                Margin="10"
+                Text="Vorname:"
+                Grid.Row="2"/>
+                <TextBox 
+                Text="{Binding Vorname}" 
+                Margin="10"
+                Grid.Row="2"
+                Grid.Column="1"/>
+            </Grid>
+            <TextBlock FontSize="15" Text="Kontaktdaten:"/>
+            <Grid DataContext="{Binding Ansprechpartner}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBlock 
+                    Margin="10" 
+                    Grid.Column="0" 
+                    Grid.Row="0" 
+                    Text="E-Mail:"/>
+                <TextBlock 
+                    Margin="10" 
+                    Grid.Column="0" 
+                    Grid.Row="1" 
+                    Text="Telefonnummer:"/>
+
+                <TextBox 
+                    Margin="10" 
+                    Grid.Column="1" 
+                    Grid.Row="0"
+                    Text="{Binding EMail}"/>
+                <TextBox 
+                    Margin="10" 
+                    Grid.Column="1" 
+                    Grid.Row="1"
+                    Text="{Binding Telefon}"/>
+
+                <Button 
+                    Grid.Row="2" 
+                    Grid.Column="0" 
+                    Margin="10" 
+                    Content="Speichern"
+                    x:Name="SpeichernBtn"
+                    Click="Save_Changes"/>
+                <Button 
+                    Grid.Row="2" 
+                    Grid.Column="1" 
+                    Margin="0,10, 10, 10" 
+                    Content="Abbrechen" 
+                    Width="75" 
+                    Height="20" 
+                    HorizontalAlignment="Right"
+                    x:Name="AbbrechenBtn"
+                    IsCancel="True"/>
+            </Grid>
+        </StackPanel>
     </Grid>
 </Window>

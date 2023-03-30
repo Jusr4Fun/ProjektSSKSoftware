@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Datenbank.Service;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,17 @@ namespace SchreinereiSchmidKundensoftware
     /// </summary>
     public partial class EingabeFenster : Window
     {
-        public EingabeFenster()
+        private DataService dataService;
+        public EingabeFenster(DataService datas)
         {
             InitializeComponent();
+            this.dataService = datas;
+            this.DataContext = dataService;
+        }
+
+        private void Save_Changes(object sender, RoutedEventArgs s)
+        {
+
         }
     }
 }

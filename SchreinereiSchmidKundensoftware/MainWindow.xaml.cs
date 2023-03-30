@@ -42,6 +42,10 @@ public partial class MainWindow : Window
 
     private void Button_Click(object sender, RoutedEventArgs e)
     {
+        var window = new EingabeFenster(dataservice);
+        window.Owner = this;
+        window.ShowDialog();
+
         //using (var context = new DataBaseContext())
         //{
         //    // Creates the database if not exists
