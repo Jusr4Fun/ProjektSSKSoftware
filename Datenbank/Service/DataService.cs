@@ -114,6 +114,7 @@ public class DataService : INotifyPropertyChanged
 
             context.SaveChanges();
         }
+        getData(_filter);
     }
 
     public void NewKunde()

@@ -60,7 +60,9 @@ public partial class MainWindow : Window
 
     private void Delete_Click(object sender, RoutedEventArgs e)
     {
-        dataservice.deleteKunde();
+        MessageBoxResult bestätigelöschen = System.Windows.MessageBox.Show("Sind sie sich sicher?", "Löschen bestätigen", System.Windows.MessageBoxButton.YesNo);
+        if (bestätigelöschen == MessageBoxResult.Yes)
+            dataservice.deleteKunde();
     }
 
     private void Suchfeld_TextChanged(object sender, TextChangedEventArgs e)
@@ -78,7 +80,6 @@ public partial class MainWindow : Window
         dataservice.Kunde.Ansprechpartner = ansP;
         NeuKundeFenster neuerKunde = new NeuKundeFenster(dataservice);
         neuerKunde.Title = "Neuen Kunden Hinzufügen";
-        neuerKunde.Owner = this;
         neuerKunde.ShowDialog();
     }
 }
