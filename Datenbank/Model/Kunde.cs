@@ -23,6 +23,19 @@ public class Kunde
         Betrieb = this.Betrieb,
         Straße = this.Straße,
         Ort = this.Ort,
-        PLZ = this.PLZ
+        PLZ = this.PLZ,
+        AnsprechId = this.AnsprechId,
+        Ansprechpartner = this.Ansprechpartner
     };
+
+    public void CopyValues(Kunde kunde)
+    {
+        ID = kunde.ID;
+        Betrieb = kunde.Betrieb;
+        Straße = kunde.Straße;
+        Ort = kunde.Ort;
+        PLZ = kunde.PLZ;
+        AnsprechId = kunde.AnsprechId;
+        Ansprechpartner = kunde.Ansprechpartner;
+    }
 }
