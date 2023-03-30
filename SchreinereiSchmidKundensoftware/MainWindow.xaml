@@ -20,8 +20,8 @@
 
             <TextBlock Grid.Column="0" FontSize="24" Text="Kundenverwaltung"></TextBlock>
             <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Center">
-                <TextBox Grid.Column="1" Width="100" Margin="20 0 10 0" MaxLines="1" x:Name="Suchfeld"/>
-                <Button Grid.Column="2" Padding="10 0 10 0"  Content="Suchen" Click="Search_Click"/>
+                <TextBlock FontSize="24" Text="Suche:"/>
+                <TextBox Width="100" Margin="20 0 10 0" MaxLines="1" x:Name="Suchfeld" TextChanged="Suchfeld_TextChanged"/>
             </StackPanel>
             <Button Grid.Column="2" Padding="10 0 10 0"  HorizontalAlignment="Right" Content="BaseView" Click="Button_Click"/>
         </Grid>
