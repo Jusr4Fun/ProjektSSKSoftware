@@ -37,7 +37,12 @@ namespace SchreinereiSchmidKundensoftware
 
         private void Cancel_Changes(object sender, RoutedEventArgs e)
         {
-            dataService.Kunde = dataService.Kunde_old;
+            dataService.Kunde_old.CopyValues(dataService.Kunde);
+            dataService.Kunde_old = null; 
+            Kunde temp = dataService.Kunde;
+            dataService.Kunde = null;
+            dataService.Kunde = temp;
+            //dataService.getData();
         }
     }
 }
