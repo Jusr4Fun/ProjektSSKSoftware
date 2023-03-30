@@ -1,0 +1,210 @@
+﻿<Window x:Class="SchreinereiSchmidKundensoftware.NeuKundeFenster"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SchreinereiSchmidKundensoftware"
+        mc:Ignorable="d"
+        Title="NeuKundeFenster" SizeToContent="WidthAndHeight">
+
+    <Grid
+        Margin="10"
+        DataContext="{Binding Kunde}">
+        
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock 
+            Grid.Row="0"
+            Grid.ColumnSpan="2" 
+            FontSize="25"
+            TextAlignment="Center" 
+            Text="Neuen Kunden Hinzufügen"/>
+
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            
+            <TextBlock 
+                Margin="5" 
+                Grid.Row="0" 
+                FontSize="15" 
+                Text="Name des Betriebs:"/>
+            <TextBox 
+                Margin="5"
+                Grid.Row="1" 
+                Text="{Binding Betrieb}"/>
+            <TextBlock 
+                Margin="5" 
+                Grid.Row="2" 
+                FontSize="15" 
+                Text="Standort:"/>
+            
+            <Grid Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                
+                <TextBlock 
+                    Margin="5" 
+                    Grid.Column="0" 
+                    Grid.Row="0" 
+                    Text="Straße:"/>
+                <TextBlock 
+                    Margin="5" 
+                    Grid.Column="0" 
+                    Grid.Row="1" 
+                    Text="Ort:"/>
+                <TextBlock 
+                    Margin="5" 
+                    Grid.Column="0" 
+                    Grid.Row="2" 
+                    Text="Postleitzahl:"/>
+
+                <TextBox 
+                    Margin="5" 
+                    Grid.Column="1" 
+                    Text="{Binding Straße}" 
+                    Grid.Row="0"
+                    MinWidth="80"/>
+                <TextBox 
+                    Margin="5" 
+                    Grid.Column="1" 
+                    Text="{Binding Ort}" 
+                    Grid.Row="1"/>
+                <TextBox 
+                    Margin="5" 
+                    Grid.Column="1" 
+                    Text="{Binding PLZ}" 
+                    Grid.Row="2"/>
+            </Grid>
+            
+        </Grid>
+
+        <Grid DataContext="{Binding Ansprechpartner}" Grid.IsSharedSizeScope="True" Grid.Row="1" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock 
+                    Margin="5"
+                    Grid.Row="0"
+                    FontSize="15"
+                    Text="Ansprechpartner"/>
+            
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition SharedSizeGroup="Bezeichnung"/>
+                    <ColumnDefinition SharedSizeGroup="TextFelder"/>
+                </Grid.ColumnDefinitions>
+                
+                
+                <TextBlock
+                    Margin="5"                    
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Text="Name:"/>
+                <TextBox 
+                    Margin="5"                   
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    MinWidth="80"
+                    Text="{Binding Name}"/>
+                <TextBlock
+                    Margin="5"
+                    Text="Vorname:"
+                    Grid.Row="2"
+                    Grid.Column="0"/>
+                <TextBox 
+                    Margin="5"                  
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    Text="{Binding Vorname}"/>
+            </Grid>
+
+            <TextBlock 
+                    Margin="5"
+                    Grid.Row="2" 
+                    FontSize="15" 
+                    Text="Kontaktdaten:" />
+
+            <Grid Grid.Row="3">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition SharedSizeGroup="Bezeichnung"/>
+                    <ColumnDefinition SharedSizeGroup="TextFelder"/>
+                </Grid.ColumnDefinitions>
+
+
+                <TextBlock  
+                    Margin="5"
+                    Grid.Column="0" 
+                    Grid.Row="0"
+                    Text="E-Mail:"/>
+                <TextBlock 
+                    Margin="5"
+                    Grid.Column="0" 
+                    Grid.Row="1" 
+                    Text="Telefonnummer:"/>
+                <TextBox 
+                    Margin="5"
+                    Grid.Column="1" 
+                    Grid.Row="0"
+                    Text="{Binding EMail}"/>
+                <TextBox 
+                    Margin="5"
+                    Grid.Column="1" 
+                    Grid.Row="1"
+                    Text="{Binding Telefon}"/>
+            </Grid>
+
+        </Grid>
+        
+        <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" FlowDirection="RightToLeft">
+            <Button 
+                    Margin="5"
+                    Padding="10 0 10 0"
+                    Content="Speichern"
+                    x:Name="SpeichernBtn"
+                    Click="Save_Changes"/>
+            <Button 
+                    Margin="5"
+                    Padding="10 0 10 0"
+                    Content="Abbrechen" 
+                    x:Name="AbbrechenBtn"
+                    Click="Cancel_Click"
+                    IsCancel="True"/>
+        </StackPanel>
+        
+    </Grid>
+    
+</Window>

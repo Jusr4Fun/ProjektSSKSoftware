@@ -23,7 +23,10 @@
                 <TextBlock FontSize="24" Text="Suche:"/>
                 <TextBox Width="100" Margin="20 0 10 0" MaxLines="1" x:Name="Suchfeld" TextChanged="Suchfeld_TextChanged"/>
             </StackPanel>
-            <Button Grid.Column="2" Padding="10 0 10 0"  HorizontalAlignment="Right" Content="Bearbeiten" Click="Button_Click"/>
+            <StackPanel Orientation="Horizontal" Grid.Column="2" HorizontalAlignment="Center">
+                <Button Padding="10 0 10 0"  Margin="0 0 10 0" HorizontalAlignment="Right"  Content="neuer Kunde" Click="Neuer_Kunde_Click"/>
+                
+            </StackPanel>
         </Grid>
 
         <Grid Grid.Row="1" Margin="0 10 0 0">
@@ -43,19 +46,12 @@
                     </GridView>
                 </ListView.View>
             </ListView>
-            <!--<DataGrid Name="DG1" AutoGenerateColumns="False" Grid.Column="0">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="DataGrid" />
-                    <DataGridTextColumn Header="DataGrid" />
-                    <DataGridTextColumn Header="DataGrid" />
-                    <DataGridTextColumn Header="DataGrid" />
-                </DataGrid.Columns>
-            </DataGrid>-->
-            
+
             <Grid Margin="10" Grid.Column="1" DataContext="{Binding Kunde}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
                 <Grid Grid.Row="0">
@@ -96,7 +92,7 @@
 
                     <TextBlock Text="Ansprechpartner" FontSize="16" Grid.Row="0"/>
                     <TextBlock Text="Name" Grid.Row="1" Grid.Column="0"/>
-                    <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1" Width="500">
+                    <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1">
                         <TextBlock Text="{Binding Vorname}"/>
                         <TextBlock Text=" "/>
                         <TextBlock Text="{Binding Name}" />
@@ -107,6 +103,10 @@
                     <TextBlock Text="{Binding Telefon}" Grid.Row="3" Grid.Column="1"/>
                 </Grid>
 
+                <DockPanel Grid.Row="2">
+                    <Button Padding="10 0 10 0"  HorizontalAlignment="Left" VerticalAlignment="Bottom" Content="Löschen" Click="Delete_Click"/>
+                    <Button Padding="10 0 10 0"  HorizontalAlignment="Right" VerticalAlignment="Bottom" Content="Bearbeiten" Click="Button_Click"/>
+                </DockPanel>
             </Grid>
         </Grid>
     </Grid>

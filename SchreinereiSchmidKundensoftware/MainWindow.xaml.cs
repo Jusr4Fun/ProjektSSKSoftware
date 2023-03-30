@@ -30,7 +30,7 @@ public partial class MainWindow : Window
     {
         InitializeComponent();       
         filter = new Filter();
-        dataservice = new DataService();
+        dataservice = new DataService(filter);
         Startup();
         this.DataContext = dataservice;
     }
@@ -45,35 +45,6 @@ public partial class MainWindow : Window
         var window = new EingabeFenster(dataservice);
         window.Owner = this;
         window.ShowDialog();
-
-        //using (var context = new DataBaseContext())
-        //{
-        //    // Creates the database if not exists
-        //    context.Database.EnsureCreated();
-
-        //    // Adds a publisher
-        //    var kunde = new Kunde
-        //    {
-        //        Betrieb = "Mariner Books",
-        //        Straße = "DerWeg 14",
-        //        Ort = "Berlin",
-        //        PLZ = "1234567"
-        //    };
-        //    context.Kunde.Add(kunde);
-
-        //    // Adds some books
-        //    context.Ansprechpartner.Add(new Ansprechpartner
-        //    {
-        //        Name = "978-0544003415",
-        //        Vorname = "The Lord of the Rings",
-        //        EMail = "J.R.R. Tolkien",
-        //        Telefon = "English",
-        //        Kunde = kunde
-        //    });
-
-        //    // Saves changes
-        //    context.SaveChanges();
-        //}
     }
 
     private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -87,10 +58,27 @@ public partial class MainWindow : Window
         dataservice.getData(filter);
     }
 
+    private void Delete_Click(object sender, RoutedEventArgs e)
+    {
+        dataservice.deleteKunde();
+    }
+
     private void Suchfeld_TextChanged(object sender, TextChangedEventArgs e)
     {
         filter.ChangeFilterArguments(Suchfeld.Text);
         dataservice.getData(filter);
         AllList.SelectedIndex = 0;
+    }
+
+    private void Neuer_Kunde_Click(object sender, RoutedEventArgs e)
+    {
+        dataservice.Kunde_old = dataservice.Kunde;
+        var ansP = new Ansprechpartner();
+        dataservice.Kunde = new Kunde();
+        dataservice.Kunde.Ansprechpartner = ansP;
+        NeuKundeFenster neuerKunde = new NeuKundeFenster(dataservice);
+        neuerKunde.Title = "Neuen Kunden Hinzufügen";
+        neuerKunde.Owner = this;
+        neuerKunde.ShowDialog();
     }
 }

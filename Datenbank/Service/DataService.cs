@@ -10,12 +10,15 @@ using Datenbank.Model;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.CodeDom;
 
 namespace Datenbank.Service;
 
 public class DataService : INotifyPropertyChanged
 {
+    private Filter _filter;
     private Kunde _kunde;
+    private Kunde _kunde_old;
     private ObservableCollection<Kunde> _kundeList = new ObservableCollection<Kunde>();
     public ObservableCollection<Kunde> Kunden {
         get => _kundeList;
@@ -38,6 +41,23 @@ public class DataService : INotifyPropertyChanged
         }
     }
 
+    public Kunde Kunde_old
+    {
+        get => _kunde_old;
+        set
+        {
+            if (_kunde_old == value) return;
+
+            _kunde_old = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public DataService(Filter filter)
+    {
+        _filter= filter;
+    }
+
     public event PropertyChangedEventHandler? PropertyChanged;
     protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null) { PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName)); }
 
@@ -45,7 +65,8 @@ public class DataService : INotifyPropertyChanged
 
         using (var context = new DataBaseContext())
         {
-            var list = SearchProducts(filter.returnFilterArgsArray()).ToList();            Kunden = new ObservableCollection<Kunde>(list);
+            var list = SearchProducts(filter.returnFilterArgsArray()).ToList();            
+            Kunden = new ObservableCollection<Kunde>(list);
         }
     }
 
@@ -83,5 +104,30 @@ public class DataService : INotifyPropertyChanged
 
             context.SaveChanges();
         }
+    }
+
+    public void deleteKunde()
+    {
+        using(var context = new DataBaseContext())
+        {
+            context.Remove(Kunde);
+
+            context.SaveChanges();
+        }
+    }
+
+    public void NewKunde()
+    {
+        using (var context = new DataBaseContext())
+        {
+            context.Database.EnsureCreated();
+
+            context.Ansprechpartner.Add(Kunde.Ansprechpartner);
+
+            context.Kunde.Add(Kunde);
+
+            context.SaveChanges();
+        }
+        getData(_filter);
     }
 }
