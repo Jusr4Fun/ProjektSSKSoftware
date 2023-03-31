@@ -44,7 +44,7 @@
                     Margin="0,0,10,0"
                     Padding="10,0,10,0"
                     HorizontalAlignment="Right"
-                    Click="Neuer_Kunde_Click"
+                    Click="NeuerKunde_Click"
                     Content="neuer Kunde" />
 
             </StackPanel>

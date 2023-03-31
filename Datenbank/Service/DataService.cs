@@ -9,11 +9,11 @@ namespace Datenbank.Service;
 
 public class DataService : INotifyPropertyChanged
 {
-    private Filter _filter;
-    private Kunde _kunde;
-    private Kunde _kunde_old;
-    private ObservableCollection<Kunde> _kundeList = new ObservableCollection<Kunde>();
-    private DataBaseContext _context;
+    private readonly Filter _filter;
+    private Kunde _kunde = new();
+    private Kunde _kunde_old = new();
+    private ObservableCollection<Kunde> _kundeList = new();
+    private readonly DataBaseContext _context;
     public ObservableCollection<Kunde> Kunden {
         get => _kundeList;
         set
@@ -56,19 +56,13 @@ public class DataService : INotifyPropertyChanged
     public event PropertyChangedEventHandler? PropertyChanged;
     protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null) { PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName)); }
 
-    public void getData() {
-
-        var list = SearchProducts(_filter.returnFilterArgsArray()).ToList();
-        Kunden = new ObservableCollection<Kunde>(list);
-    }
-
-    public void getData(Filter filter)
+    public void GetData(Filter filter)
     {
         var list = SearchProducts(filter.returnFilterArgsArray()).ToList();
         Kunden = new ObservableCollection<Kunde>(list);
     }
 
-    public void changeKunde(Kunde kunde)
+    public void ChangeKunde(Kunde kunde)
     {
         Kunde= kunde;
     }
@@ -99,12 +93,12 @@ public class DataService : INotifyPropertyChanged
         _context.SaveChanges();
     }
 
-    public void deleteKunde()
+    public void DeleteKunde()
     {
         _context.Remove(Kunde);
         _context.Remove(Kunde.Ansprechpartner);
         _context.SaveChanges();
-        getData(_filter);
+        GetData(_filter);
     }
 
     public void NewKunde()
@@ -113,6 +107,6 @@ public class DataService : INotifyPropertyChanged
         _context.Ansprechpartner.Add(Kunde.Ansprechpartner);
         _context.Kunde.Add(Kunde);
         _context.SaveChanges();
-        getData(_filter);
+        GetData(_filter);
     }
 }

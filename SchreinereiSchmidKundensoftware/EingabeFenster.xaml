@@ -149,7 +149,7 @@
                     Margin="10" 
                     Content="Speichern"
                     x:Name="SpeichernBtn"
-                    Click="Save_Changes"/>
+                    Click="SaveNew_Click"/>
                 
                 <Button 
                     Grid.Row="2" 
@@ -160,7 +160,7 @@
                     Height="20" 
                     HorizontalAlignment="Right"
                     x:Name="AbbrechenBtn"
-                    Click="Cancel_Changes"
+                    Click="Cancel_Click"
                     IsCancel="True"/>
             </Grid>
         </StackPanel>

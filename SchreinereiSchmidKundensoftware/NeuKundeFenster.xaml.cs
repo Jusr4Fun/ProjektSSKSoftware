@@ -9,23 +9,23 @@ namespace SchreinereiSchmidKundensoftware;
 /// </summary>
 public partial class NeuKundeFenster : Window
 {
-    private DataService dataService;
+    private readonly DataService _dataService;
     public NeuKundeFenster(DataService datas)
     {
         InitializeComponent();
-        this.dataService = datas;
-        this.DataContext = dataService;
+        this._dataService = datas;
+        this.DataContext = _dataService;
     }
 
-    private void Save_Changes(object sender, RoutedEventArgs s)
+    private void SaveChanges_Click(object sender, RoutedEventArgs e)
     {
-        dataService.NewKunde();
+        _dataService.NewKunde();
         Close();
     }
 
-    private void Cancel_Click(object sender, RoutedEventArgs s)
+    private void Cancel_Click(object sender, RoutedEventArgs e)
     {
-        dataService.Kunde = dataService.Kunde_old;
-        dataService.Kunde_old = null;
+        _dataService.Kunde = _dataService.Kunde_old;
+        _dataService.Kunde_old = new();
     }
 }

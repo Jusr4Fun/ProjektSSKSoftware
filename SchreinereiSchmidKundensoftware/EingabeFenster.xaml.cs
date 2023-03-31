@@ -1,48 +1,35 @@
 ﻿using Datenbank.Model;
 using Datenbank.Service;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
-namespace SchreinereiSchmidKundensoftware
+namespace SchreinereiSchmidKundensoftware;
+
+/// <summary>
+/// Interaktionslogik für EingabeFenster.xaml
+/// </summary>
+public partial class EingabeFenster : Window
 {
-    /// <summary>
-    /// Interaktionslogik für EingabeFenster.xaml
-    /// </summary>
-    public partial class EingabeFenster : Window
+    private readonly DataService _dataService;
+    public EingabeFenster(DataService datas)
     {
-        private DataService dataService;
-        public EingabeFenster(DataService datas)
-        {
-            InitializeComponent();
-            this.dataService = datas;
-            this.DataContext = dataService;
-        }
+        InitializeComponent();
+        this._dataService = datas;
+        this.DataContext = _dataService;
+    }
 
-        private void Save_Changes(object sender, RoutedEventArgs e)
-        {
-            dataService.UpdateKunde();
-            Close();
-        }
+    private void SaveNew_Click(object sender, RoutedEventArgs e)
+    {
+        _dataService.UpdateKunde();
+        Close();
+    }
 
-        private void Cancel_Changes(object sender, RoutedEventArgs e)
-        {
-            dataService.Kunde_old.CopyValues(dataService.Kunde);
-            dataService.Kunde_old = null; 
-            Kunde temp = dataService.Kunde;
-            dataService.Kunde = null;
-            dataService.Kunde = temp;
-            //dataService.getData();
-        }
+    private void Cancel_Click(object sender, RoutedEventArgs e)
+    {
+        _dataService.Kunde_old.CopyValues(_dataService.Kunde);
+        _dataService.Kunde_old = new(); 
+        Kunde temp = _dataService.Kunde;
+        _dataService.Kunde = new();
+        _dataService.Kunde = temp;
+        //dataService.getData();
     }
 }

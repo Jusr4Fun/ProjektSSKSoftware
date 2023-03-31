@@ -195,7 +195,7 @@
                     Padding="10 0 10 0"
                     Content="Speichern"
                     x:Name="SpeichernBtn"
-                    Click="Save_Changes"/>
+                    Click="SaveChanges_Click"/>
             <Button 
                     Margin="5"
                     Padding="10 0 10 0"
