@@ -10,7 +10,7 @@ public class DataBaseContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseMySQL("server=localhost;database=test;user=user");
+        optionsBuilder.UseMySQL("server=localhost;database=schreinerei_schmid_kunden;user=user");
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
